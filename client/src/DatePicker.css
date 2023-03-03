@@ -1,0 +1,110 @@
+.date-picker-container {
+    position: relative;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Styles for the input field */
+  .date-picker-input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Styles for the calendar */
+  .date-picker-calendar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  /* Styles for the calendar header */
+  .date-picker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+  }
+  
+  /* Styles for the calendar body */
+  .date-picker-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  /* Styles for the calendar days */
+  .date-picker-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .date-picker-day:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Styles for the selected day */
+  .date-picker-day.selected {
+    background-color: #0077c2;
+    color: #fff;
+  }
+  
+  /* Styles for the disabled day */
+  .date-picker-day.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Styles for the current day */
+  .date-picker-day.current {
+    border: 1px solid #0077c2;
+  }
+  
+  /* Styles for the arrow buttons */
+  .date-picker-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .date-picker-arrow:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Styles for the previous arrow */
+  .date-picker-arrow.previous {
+    margin-right: 10px;
+  }
+  
+  /* Styles for the next arrow */
+  .date-picker-arrow.next {
+    margin-left: 10px;
+  }
