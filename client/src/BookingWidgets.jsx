@@ -26,7 +26,6 @@ export default function BookingWidgets({ place }) {
 
         }).catch(err => console.log(err));
     }
-    console.log(checkIn);
 
     return (
         <div className="bg-white shadow p-4 rounded-2xl">

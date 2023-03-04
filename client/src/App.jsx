@@ -12,7 +12,6 @@ import PlaceForm from './PlaceForm';
 import PlacePage from './pages/PlacePage';
 import MyPlace from './pages/MyPlace';
 import BookingsPage from './pages/BookingsPage';
-import BookingPage from './pages/BookingPage';
 
 axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL; 
 axios.defaults.withCredentials = true;
@@ -32,7 +31,6 @@ function App() {
           <Route path='/account/places/:id' element={<PlaceForm/>}></Route> ☻ 
           <Route path='/place/:id' element={<MyPlace/>}></Route> 
           <Route path='/account/bookings' element={<BookingsPage/>}></Route>  
-          <Route path='/account/bookings/:id' element={<BookingPage/>}></Route> ☻ 
 
           {/* for myprofile subpage=undefined and  for mybookings and mu accomodation it will be bookings and places*/}
           {/* <Route path='/account/bookings' element={<Account/>}></Route>

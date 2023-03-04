@@ -37,19 +37,4 @@ mongoose.connect(process.env.MONGO_URL, {
 setupCronJob();
 app.use('/api', router);
 
-// app.use('/api', router);
-
-// app.use(express.static(path.join(__dirname, "./client/dist")));
-
-// app.get("*", function (_, res) {
-//   res.sendFile(
-//     path.join(__dirname, "./client/dist/index.html"),
-//     function (err) {
-//       if (err) {
-//         res.status(500).send(err);
-//       }
-//     }
-//   );
-// });
-
 app.listen(port);

@@ -43,7 +43,7 @@ export default function BookingsPage() {
 
     return (
         <>
-        <Loading loading={loading}/>
+        <Loading loading={loading} flag={true}/>
         <AccountPage />
         <CSSTransition in={isOpen} appear timeout={1000} classNames="my-transition" unmountOnExit>
         <div>

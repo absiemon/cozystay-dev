@@ -1,5 +1,5 @@
 .loading-container {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -7,9 +7,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Greyish background color */
+    background-color: rgba(0, 0, 0, 0.5);/* Greyish background color  */
   }
   
+  .loading-container2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .loading-spinner {
     border: 8px solid #f3f3f3;
     border-top: 8px solid #8B5CF6;
