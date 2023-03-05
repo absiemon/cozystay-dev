@@ -12,7 +12,7 @@ export default function BookingWidgets({ place }) {
     const [noOfGuests, setNoOfGuests] = useState(1);
     const [name, setName] = useState('');
     const [mobile, setMobile] = useState();
-
+    console.log(checkIn)
     let bookingPrice = 0;
     if (checkIn && checkOut) {
         bookingPrice = (differenceInCalendarDays(new Date(checkOut), new Date(checkIn)) * place?.price).toLocaleString();
@@ -61,7 +61,7 @@ export default function BookingWidgets({ place }) {
                             placeholderText="Check out"
                             dateFormat="MMMM d, yyyy"
                             popperPlacement="bottom-start"
-                            minDate={new Date()}
+                            minDate={new Date(checkIn).setDate(new Date(checkIn).getDate() +1 )}
                         />
                     </div>
                 </div>
