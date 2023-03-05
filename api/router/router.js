@@ -18,7 +18,7 @@ router.post('/uploads', upload.array('photos', 100), uploadViaSystem);
 router.post('/new-place', newPlace);
 router.get('/get-places', getPlaces);
 router.get('/place/:id', getPlaceById);
-router.get('/all-places', getAllPlaces);
+router.get('/all-places/:searchQuery', getAllPlaces);
 router.post('/mark-under-renovation', markUnderRenovation);
 
 router.post('/booking', bookPlace);

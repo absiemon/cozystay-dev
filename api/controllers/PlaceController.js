@@ -131,9 +131,17 @@ module.exports.getPlaceById = async (req, res) => {
 }
 
 module.exports.getAllPlaces = async (req, res) => {
+    const { searchQuery } = req.params;
     try {
-        const places = await Place.find();
-        res.json(places);
+
+        if(searchQuery.length ==1 ){
+            const places = await Place.find();
+            res.json(places);
+        }
+        else{
+            const places = await Place.find({state: searchQuery});
+            res.json(places);
+        }
     }
     catch (err) {
         res.status(422).json(err);
