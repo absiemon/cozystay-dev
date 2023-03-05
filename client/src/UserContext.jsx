@@ -7,10 +7,7 @@ export function UserContextProvider({children}){
     const [user, setUser] = useState(null);
     const [ready, setReady] = useState(false);
 
-    const [anyState, setAnyState] = useState('');
-    const [anyTitle, setAnyTitle] = useState('');
-    // const [isSearched, setIsSearched] = useState(false);
-    const [searchQuery, setSearchQuery] = useState({ anyState: '', anyTitle: '' });
+    const [searchQuery, setSearchQuery] = useState("a");
 
     useEffect(() => {
         if(!user){
@@ -24,7 +21,7 @@ export function UserContextProvider({children}){
         }
     }, [user])
     return(
-        <UserContext.Provider value={{user,setUser, ready, anyState, setAnyState, anyTitle, setAnyTitle,searchQuery, setSearchQuery}}>
+        <UserContext.Provider value={{user,setUser, ready,searchQuery, setSearchQuery}}>
             {children}
         </UserContext.Provider>
     )
