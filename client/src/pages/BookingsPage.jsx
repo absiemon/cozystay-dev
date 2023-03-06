@@ -5,6 +5,7 @@ import Loading from "../loader";
 import AccountPage from "./AccountPage";
 import { CSSTransition } from 'react-transition-group';
 import '../my-transition.css';
+import PopUp from "../PopUp";
 
 // for showing all bookings in the bookings section
 export default function BookingsPage() {
@@ -12,6 +13,7 @@ export default function BookingsPage() {
     const[loading, setLoading] = useState(false);
     const [bookings, setBookings] = useState([]);
     const [cancel, setCancel] = useState(false);
+    const [popUp, setPopUp] = useState(false);
     
     useEffect(() => {
         setIsOpen(true);
@@ -25,40 +27,26 @@ export default function BookingsPage() {
         })
     }, [cancel]);
 
-    const cancelBooking = async(id, placeId) => {
-        setLoading(true);
-        await axios.post('/cancel-booking', {id, placeId}).then((res) => {
-            setLoading(false);
-            if(!cancel){
-                setCancel(true);
-            }
-            else{
-                setCancel(false);
-            }
-            
-        }).catch(err => {
-            console.log(err);
-        })
-    }
-
     return (
         <>
         <Loading loading={loading} flag={true}/>
         <AccountPage />
+
         <CSSTransition in={isOpen} appear timeout={1000} classNames="my-transition" unmountOnExit>
         <div>
             <div>
                 {bookings?.length > 0 && bookings.map(booking => (
-                    <div className="flex gap-4 bg-white rounded-2xl overflow-hidden">
+                    <div className="flex gap-4 bg-white rounded-2xl overflow-hidden" key={booking._id}>
                         <div className="h-34 w-48 mt-2">
                             {booking.placeId.photos.length > 0 && (
                                 <img className="object-cover" src={booking.placeId.photos[0]} alt="photo" />
                             )}
                         </div>
+                        <PopUp popUp={popUp} setPopUp={setPopUp} bookingId={booking._id} placeId={booking.placeId._id} cancel={cancel} setCancel={setCancel}/>
 
                         <div className="py-3 pr-3 grow">
                             <h2 className="text-xl">{booking.placeId.title}</h2>
-                            <button className="absolute bg-primary text-white flex py-1 px-3 rounded-2xl right-20 -mt-5 gap-1" onClick={()=> cancelBooking(booking._id, booking.placeId._id)}>
+                            <button className="absolute bg-primary text-white flex py-1 px-3 rounded-2xl right-20 -mt-5 gap-1" onClick={()=> setPopUp(true)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>

@@ -66,10 +66,10 @@ module.exports.getBookings = async(req, res)=>{
 
 module.exports.cancelBooking = async(req, res)=>{
     const { token } = req.cookies;
-    const { id, placeId } = req.body;
+    const { bookingId, placeId } = req.body;
     try{
         await getUserDataFromToken(token).then(async (userData) => {
-            await Booking.deleteOne({ _id: id }).then(async (data) => {
+            await Booking.deleteOne({ _id: bookingId }).then(async (data) => {
                 await Place.findByIdAndUpdate({ _id: placeId }, { isBooked: false }, { new: true });
                 res.json({ msg: "deleted successfully", data });
             })
