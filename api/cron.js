@@ -4,7 +4,7 @@ const Place = require('./models/Places.js');
 
 function setupCronJob(){
   // Run this task every day at midnight
-  cron.schedule('0 0 * * *', async () => {
+  cron.schedule('0 22 * * *', async () => {
     console.log("cron running")
     const currentDate = new Date();
     // Find all bookings where the checkout time has passed

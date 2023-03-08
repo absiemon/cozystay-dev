@@ -105,12 +105,12 @@ export default function PlaceForm({ flag }) {
             extraInfo, perks, bedrooms, guests, price
         };
 
-        if(!title || !nearby || !city || !state || !zipcode || !description || !extraInfo || !bedrooms || !guests || !price){
-            toast.warn("all input should be filled");
+        if(!title || !nearby || !city || !state || !zipcode || !description || !bedrooms || !guests || !price){
+            toast.error("all input should be filled");
             return;
         }
         if(addPhotos.length <3){
-            toast.warn("minimum 3 photos needed");
+            toast.error("minimum 3 photos needed");
             return;
         }
         else{
@@ -141,9 +141,9 @@ export default function PlaceForm({ flag }) {
             <AccountPage />
             <div className="px-4">
                 <form onSubmit={savePlace}>
-                    <h2 className="text-xl mt-4 font-semibold">Title</h2>
+                    <h2 className="text-xl mt-4 font-semibold">Title<span className="text-red-600">*</span></h2>
                     <input type="text" name="title" value={fields.title} onChange={onChange} placeholder="My lovely place" />
-                    <h2 className="text-xl mt-4 font-semibold">Address</h2>
+                    <h2 className="text-xl mt-4 font-semibold">Address<span className="text-red-600">*</span></h2>
                     <div className="grid grid-cols-2 gap-2">
                         <input type="text" name="nearby" value={fields.nearby} onChange={onChange} placeholder="Nearby location" />
                         <input type="text" name="city" value={fields.city} onChange={onChange} placeholder="City" />
@@ -151,7 +151,7 @@ export default function PlaceForm({ flag }) {
 
                         <input type="text" name="zipcode" value={fields.zipcode} onChange={onChange} placeholder="zipcode" />
                     </div>
-                    <h2 className="text-xl mt-4 font-semibold">Photos<span className="text-gray-600 text-lg mx-1">(minimum 3)</span></h2>
+                    <h2 className="text-xl mt-4 font-semibold">Photos<span className="text-red-600">*</span> <span className="text-gray-600 text-lg mx-1">(minimum 3)</span> </h2>
                     <div className="flex gap-3">
                         <input type="text" name="photoLink" value={fields.photoLink} onChange={onChange} placeholder="Add using link.." />
                         <button className="bg-white px-4 rounded-2xl" onClick={addPhotoUsingLink}>Add&nbsp;photo</button>
@@ -179,7 +179,7 @@ export default function PlaceForm({ flag }) {
                             Upload
                         </label>
                     </div>
-                    <h2 className="text-xl mt-4 font-semibold">Description</h2>
+                    <h2 className="text-xl mt-4 font-semibold">Description<span className="text-red-600">*</span></h2>
                     <textarea name="description" value={fields.description} onChange={onChange} />
                     <h2 className="text-xl mt-4 font-semibold">Perks</h2>
                     <div className="grid mt-2 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
@@ -187,19 +187,19 @@ export default function PlaceForm({ flag }) {
                     </div>
                     <h2 className="text-xl mt-4 font-semibold">Extra info</h2>
                     <textarea name="extraInfo" value={fields.extraInfo} onChange={onChange} />
-                    <h2 className="text-xl mt-4 font-semibold">Other info</h2>
+                    <h2 className="text-xl mt-4 font-semibold">Other info<span className="text-red-600">*</span></h2>
                     <div className="grid gap-2 grid-cols-2 md:grid-cols-3">
                         <div>
-                            <h3 className="mt-2 -mb-1 ">No of bedrooms</h3>
+                            <h3 className="mt-2 -mb-1 font-semibold">No of bedrooms<span className="text-red-600">*</span></h3>
                             <input type="number" name="bedrooms" value={fields.bedrooms} onChange={onChange}  />
                         </div>
                         
                         <div>
-                            <h3 className="mt-2 -mb-1 " >Max guests</h3>
+                            <h3 className="mt-2 -mb-1 font-semibold" >Max guests<span className="text-red-600">*</span></h3>
                             <input type="number" name="guests" value={fields.guests} onChange={onChange} />
                         </div>
                         <div>
-                            <h3 className="mt-2 -mb-1 " >Price</h3>
+                            <h3 className="mt-2 -mb-1 font-semibold" >Price<span className="text-red-600">*</span></h3>
                             <input type="number" name="price" value={fields.price} onChange={onChange} />
                         </div>
                     </div>

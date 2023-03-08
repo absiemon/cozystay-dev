@@ -61,7 +61,7 @@ export default function RegisterPage() {
                         <button className="primary">Register</button>
                         <div className="text-center py-2 text-gray-500">
                             Already a member?
-                            <Link to={'/login'} className="underline text-black">Login</Link>
+                            <Link to={'/login'} className="underline text-black font-semibold mx-1">Login</Link>
                         </div>
                     </form>
                 </div>
