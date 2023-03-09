@@ -6,7 +6,7 @@ export function UserContextProvider({children}){
 
     const [user, setUser] = useState(null);
     const [ready, setReady] = useState(false);
-
+    const [flag, setFlag] = useState(false);
     const [searchQuery, setSearchQuery] = useState("a");
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export function UserContextProvider({children}){
         }
     }, [user])
     return(
-        <UserContext.Provider value={{user,setUser, ready,searchQuery, setSearchQuery}}>
+        <UserContext.Provider value={{user,setUser, ready,searchQuery, setSearchQuery ,flag, setFlag}}>
             {children}
         </UserContext.Provider>
     )

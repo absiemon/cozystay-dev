@@ -1,16 +1,14 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Perks from "./Perks";
 import AccountPage from "./pages/AccountPage";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loading from "./loader";
 
 export default function PlaceForm({ flag }) {
 
     const[loading, setLoading] = useState(false);
-
     const navigate = useNavigate();
     const { id } = useParams(); // for add new palce id will be null and for editing place it will be some id.
     const [fields, setFields] = useState({
@@ -117,7 +115,7 @@ export default function PlaceForm({ flag }) {
             setLoading(true)
             await axios.post(`/new-place?id=${id}`, data).then((response) => {
                 flag = true;
-                setLoading(false)
+                setLoading(false);
                 navigate('/account/places');
                 window.location.reload();
             }).catch((error) =>{
@@ -137,7 +135,6 @@ export default function PlaceForm({ flag }) {
     return (
         <>  
             <ToastContainer />
-            <Loading loading={loading}/>
             <AccountPage />
             <div className="px-4">
                 <form onSubmit={savePlace}>
@@ -171,12 +168,12 @@ export default function PlaceForm({ flag }) {
                                 </div>
                             )
                         })}
-                        <label className="h-32 flex cursor-pointer items-center justify-center border bg-white rounded-2xl p-2 text-2xl text-gray-600 gap-3">
-                            <input type="file" className="hidden" accept="image/*" onChange={uploadFromDevice} multiple />
+                        <label className={`h-32 flex items-center justify-center border ${!loading ? 'bg-white cursor-pointer' : 'bg-gray-300'} rounded-2xl p-2 text-2xl text-gray-600 gap-3`}>
+                            <input type="file" className="hidden" accept="image/*" onChange={uploadFromDevice} multiple disabled={loading}/>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 00021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
                             </svg>
-                            Upload
+                            {!loading ? 'Upload' : 'Uploading...'}
                         </label>
                     </div>
                     <h2 className="text-xl mt-4 font-semibold">Description<span className="text-red-600">*</span></h2>
@@ -203,7 +200,7 @@ export default function PlaceForm({ flag }) {
                             <input type="number" name="price" value={fields.price} onChange={onChange} />
                         </div>
                     </div>
-                    <button className="primary my-4">Save</button>
+                    {!loading ?<button className="primary my-4 font-semibold">Save</button> : <button className="loading my-4 font-semibold" disabled={loading}>Saving...</button> }
                 </form>
             </div>
         </>

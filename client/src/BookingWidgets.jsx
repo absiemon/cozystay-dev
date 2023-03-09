@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState, useContext } from "react"
 import { differenceInCalendarDays } from 'date-fns'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -6,10 +6,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loading from './loader'
+import { UserContext } from "./UserContext";
 
 export default function BookingWidgets({ place }) {
     const navigate = useNavigate();
+    const { user} = useContext(UserContext);
     const [checkIn, setCheckIn] = useState('')
     const [checkOut, setCheckOut] = useState('')
     const [noOfGuests, setNoOfGuests] = useState(1);
@@ -23,6 +24,10 @@ export default function BookingWidgets({ place }) {
     }
     const bookThisPlace = async () => {
 
+        if(!user){
+            navigate('/login');
+            return;
+        }
         if(!checkIn || !checkOut || !noOfGuests || !name || !mobile){
             toast.error("All fields are mandatory");
             return;
@@ -43,7 +48,6 @@ export default function BookingWidgets({ place }) {
     return (
         <>
         <ToastContainer/>
-        <Loading loading={loading} />
         <div className="bg-white shadow p-4 rounded-2xl">
             <div className="text-2xl text-center">
                 Price: ₹{place?.price} /per night
@@ -100,12 +104,18 @@ export default function BookingWidgets({ place }) {
 
             </div>
 
-            <button className={"primary mt-4 font-semibold"} onClick={bookThisPlace} disabled={loading}>
+            {!loading ? 
+            <button className={"primary mt-4 font-semibold"} onClick={bookThisPlace}>
                 Book this place
                 {bookingPrice.length > 0 && (
                     <span> ₹{bookingPrice}/-</span>
                 )}
             </button>
+            :
+            <button className={"loading mt-4 font-semibold"} onClick={bookThisPlace} disabled={loading}>
+                Booking...
+            </button>
+            }
         </div>
         </>
     )

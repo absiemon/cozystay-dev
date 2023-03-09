@@ -12,5 +12,8 @@ button{
   @apply bg-gray-300;
 }
 button.primary{
-  @apply bg-primary p-2 w-full text-white rounded-2xl;
+  @apply bg-primary p-2 w-full text-white rounded-2xl font-semibold;
+}
+button.loading{
+  @apply bg-gray-500 p-2 w-full text-white rounded-2xl font-semibold;
 }

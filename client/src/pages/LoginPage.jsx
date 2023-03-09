@@ -10,6 +10,7 @@ export default function LoginPage() {
 
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const[loading2, setLoading2] = useState(false);
     const { user, setUser } = useContext(UserContext)
     const [credentials, setCredentials] = useState({
         email: "", password: "", mobileNo: "", newPassword: "", otp: ""
@@ -48,9 +49,12 @@ export default function LoginPage() {
             toast.error("please provide valid mobile number");
             return;
         }
+        setLoading2(true)
         await axios.post('/get-otp', {mobileNo}).then((res)=>{
+            setLoading2(false)
             toast.success("otp send successfully!");
         }).catch((err) => {
+            setLoading2(false)
             toast.success("Cannot send otp please try again later!");
         })
     }
@@ -62,12 +66,15 @@ export default function LoginPage() {
             toast.error("please provide valid input");
             return;
         }
+        setLoading(true);
         await axios.post('/renew-password', {mobileNo, otp, newPassword}).then((res)=>{
+            setLoading(false);
             toast.success("password changed successfully wait a littile bit!");
             setTimeout(() => {
                 setForgetPassword(false);
             }, 4000);
         }).catch((err) => {
+            setLoading(false);
             toast.success("Cannot set password please try again later!");
         })
     }
@@ -105,8 +112,8 @@ export default function LoginPage() {
                         <h1 className="text-4xl text-center mb-4">Forget Password</h1>
                         <form className="max-w-md mx-auto" >
                             <div className="flex">
-                              <input type="text" name="mobileNo" placeholder={'+917334234543'} value={credentials.mobileNo} onChange={onChange}/>
-                              <button className="primary mx-2" onClick={sendOtp}>Send otp</button>
+                              <input type="text" name="mobileNo" placeholder={'Number with country code'} value={credentials.mobileNo} onChange={onChange}/>
+                              <button className={`${!loading2 ? 'primary' : 'loading'} mx-2`} onClick={sendOtp}>{!loading2 ? 'Send otp' : 'Sending...'}</button>
                               
                             </div>
                             
